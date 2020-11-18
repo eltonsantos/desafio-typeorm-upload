@@ -66,8 +66,6 @@ class ImportTransactionsService {
 
     const finalCategories = [...existentCategories, ...newCategories];
 
-
-
     const createdTransactions = transactionsRepository.create(
       transactions.map(transaction => ({
         title: transaction.title,
@@ -81,6 +79,7 @@ class ImportTransactionsService {
 
     await transactionsRepository.save(createdTransactions);
 
+    // Apagar arquivos da pasta tmp/
     await fs.promises.unlink(filePath);
 
     return createdTransactions;
